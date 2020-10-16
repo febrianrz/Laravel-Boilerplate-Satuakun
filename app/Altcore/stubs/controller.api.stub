@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use DataTables;
-use App\ModelName;
+use App\Models\ModelName;
 use App\Altcore\Helpers\Select2;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

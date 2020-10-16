@@ -299,6 +299,8 @@ maka akan membuat beberapa file, yaitu:
  - Controller: **App\Http\Controllers\Api\CompanyUserController.php**
  - Model: **App\CompanyUser.php**
  - Policy: **App\Policies\CompanyUserPolicy.php**
+ - Request: **App\Http\Request\CompanyUserRequest.php**
+ - Resource: **App\Http\Resource\CompanyUserResource.php**
  - Migration: **database/migrations/create_company_users_table.php**
  - Seeder: **database/seeders/CompanyUserSeeder.php**
  - Factory:**database/factories/CompanyUserFactory.php**
@@ -320,6 +322,9 @@ Untuk dokumentasi lengkapnya, silahkan lihat di https://github.com/febrianrz/mak
 ## Contributing
 
  Untuk mencoba microservice Laravel ini dan ikut berkontribusi dalam pengembangannya, silahkan email ke febrianrz@alterindonesia.com.
+
+## Packagist
+Mohon maaf, saat ini belum tersedia packagistnya, karena belum sempat deploy kesana, terima kasih.
 
  
 ## License

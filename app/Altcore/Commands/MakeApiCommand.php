@@ -139,7 +139,7 @@ class MakeApiCommand extends Command
         $this->paths['migration'] = "migrations/{$date}_create_{$this->tableName}_table.php";
         $this->paths['factory'] = "factories/{$this->modelName}Factory.php";
         $this->paths['seeder'] = "seeders/{$this->pluralName}Seeder.php";
-        $this->paths['model'] = "app/{$this->modelName}.php";
+        $this->paths['model'] = "app/Models/{$this->modelName}.php";
         $this->paths['resource'] = "app/Http/Resources/{$this->modelName}Resource.php";
         $this->paths['policy'] = "app/Policies/{$this->modelName}Policy.php";
         $this->paths['request'] = "app/Http/Requests/{$this->modelName}Request.php";
