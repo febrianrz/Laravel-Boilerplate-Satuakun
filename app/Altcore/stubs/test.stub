@@ -3,8 +3,8 @@
 namespace Tests\Feature\Api;
 
 use DataTables;
-use App\User;
-use App\ModelName;
+use App\Models\User;
+use App\Models\ModelName;
 use Tests\TestCase;
 use Laravel\Passport\Passport;
 use Illuminate\Foundation\Testing\RefreshDatabase;
