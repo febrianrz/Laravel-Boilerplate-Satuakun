@@ -1,0 +1,133 @@
+<?php
+
+namespace App\Http\Controllers\Api;
+
+use DataTables;
+use App\ModelName;
+use App\Altcore\Helpers\Select2;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\ModelNameRequest;
+use App\Http\Resources\ModelNameResource;
+use App\Altcore\Helpers\AltAuth;
+
+class ModelNameController extends Controller
+{
+    protected $model = ModelName::class;
+
+    protected $relationships = [];
+
+    protected $scope = "ModelName";
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $request->_check->authorize($this->scope."-index");
+        $query = ModelName::query();
+
+        $this->loadRelationships($query);
+
+        switch ($request->format) {
+            case 'select2':
+                return Select2::of(
+                    $query->orderBy('id'),
+                    'id',
+                    'name'
+                );
+
+            case "datatable":
+                return DataTables::of($query)
+                    ->make(true);
+            default:
+                    return ModelNameResource::collection($query->paginate());
+        }
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\ModelNameRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(ModelNameRequest $request)
+    {
+        $request->_check->authorize($this->scope."-store");
+        $VariableName = new ModelName();
+
+        $VariableName->fill(
+            $request->only([
+                'name',
+            ])
+        );
+
+        $VariableName->save();
+
+        return [
+            'message' => "TitleName [{$VariableName->name}] berhasil dibuat",
+            'data' => $VariableName,
+        ];
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\ModelName  $VariableName
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ModelName $VariableName)
+    {
+        request()->_check->authorize($this->scope.'-show');
+        $this->loadRelationships($VariableName);
+
+        return ['data' => $VariableName];
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\ModelNameRequest  $request
+     * @param  \App\ModelName  $VariableName
+     * @return \Illuminate\Http\Response
+     */
+    public function update(ModelNameRequest $request, ModelName $VariableName)
+    {
+        $request->_check->authorize($this->scope."-update");
+        $name = $VariableName->name;
+
+        $VariableName->fill(
+            $request->only([
+                'name',
+            ])
+        );
+
+        $VariableName->save();
+
+        return [
+            'message' => "TitleName [{$name}] berhasil diubah",
+            'data' => $VariableName,
+        ];
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\ModelName  $VariableName
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ModelName $VariableName)
+    {
+        request()->_check->authorize($this->scope.'-destroy');
+        $VariableName->delete();
+
+        return [
+            'message' => "TitleName [{$VariableName->name}] berhasil dihapus",
+            'data' => $VariableName,
+        ];
+    }
+}
