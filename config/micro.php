@@ -8,6 +8,7 @@ return [
   'url' => [
     'auth'  => 'https://satuakun.id',
   ],
+  'check_role'      => false, // jika true, maka role authorize akan digunakan
   'role_always_true' => [ // nama nama role yang akan selalu menjadi true saat permission check
     'superuser',
     'superadmin',
