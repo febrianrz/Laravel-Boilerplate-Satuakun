@@ -17,7 +17,7 @@ class AltAuth
 
   public function can($scope)
   {
-    if(!config('micro')['check_role']) dd('norole');
+    if(!config('micro')['check_role']) return true;
     if($this->isSuperadmin) return true;
     // dd($this->scopes);
     return in_array($scope,$this->scopes);
