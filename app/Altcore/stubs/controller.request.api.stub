@@ -61,7 +61,7 @@ class ModelNameController extends Controller
         $VariableName = new ModelName();
 
         $VariableName->fill(
-            $request->only([
+            $request->_form->data([
                 'name',
             ])
         );
@@ -101,7 +101,7 @@ class ModelNameController extends Controller
         $name = $VariableName->name;
 
         $VariableName->fill(
-            $request->only([
+            $request->_form->data([
                 'name',
             ])
         );
@@ -123,6 +123,7 @@ class ModelNameController extends Controller
     public function destroy(ModelName $VariableName)
     {
         request()->_check->authorize($this->scope.'-destroy');
+        request()->_form->delete($VariableName);
         $VariableName->delete();
 
         return [

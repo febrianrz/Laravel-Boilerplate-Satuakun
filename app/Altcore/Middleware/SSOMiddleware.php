@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Altcore\Helpers\Form;
 use App\Altcore\Helpers\AltAuth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -57,6 +58,7 @@ class SSOMiddleware
                 ],
                 '_all'  => $user,
                 '_check'=> new AltAuth($user,$scopes,$isSuperadmin),
+                '_form' => new Form($request,$user),
                 '_superadmin'=> $isSuperadmin
             ]);
             return $next($request);
